@@ -1,0 +1,7 @@
+{
+  "name": "Navigator",
+  "id": "739558587628004077",
+  "api": "1.0.0",
+  "main": "dist/code.js",
+  "ui": "dist/ui.html"
+}
