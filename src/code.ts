@@ -10,16 +10,26 @@ nodes.forEach(nodes => {
     let styleName = figma.getStyleById(String(styleId)).name
     let styleParent = ""
     if (styleName.includes("/")){
-      styleParent = styleName.substr(0, styleName.indexOf('/')); 
-      styleName = styleName.substring(styleName.indexOf("/") + 1)
+      styleParent = styleName.substr(0, styleName.indexOf(' /')); 
+      styleName = styleName.substring(styleName.indexOf("/") + 2)
     }
     let colors = children.fills[0].color
     let styleColor = findTheHEX(colors.r, colors.g, colors.b)
-    ref.push({name: styleName, color: styleColor, parent: styleParent})
+    ref.push({ name: styleName, color: styleColor, parent: styleParent, styleId: styleId})
   }
 })
 
 figma.ui.postMessage({ type: 'loadThemes', themes: [ref] })
+
+figma.ui.onmessage = async msg => {
+
+  if(msg.type === "apply-styles"){
+    let styles = msg.styleId
+    figma.currentPage.selection.forEach(node => {
+      (node as VectorNode).fillStyleId = styles
+    })
+  }
+}
 
 
 function findTheHEX(red: number, green: number, blue: number) {
