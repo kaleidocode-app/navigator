@@ -31,9 +31,9 @@ setTimeout(function(){
     }
   })
 
-  ref.sort(function (a, b) {
-    return parseFloat(a.name) - parseFloat(b.name);
-  });
+  // ref.sort(function (a, b) {
+  //   return parseFloat(a.name) - parseFloat(b.name);
+  // });
   // ref.sort((one, two) => (one > two ? -1 : 1));
   figma.ui.postMessage({ type: 'loadThemes', themes: [ref] })
 
