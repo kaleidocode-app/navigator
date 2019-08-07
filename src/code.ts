@@ -43,9 +43,15 @@ figma.ui.onmessage = async msg => {
 
   if(msg.type === "apply-styles"){
     let styles = msg.styleId
-    figma.currentPage.selection.forEach(node => {
-      (node as VectorNode).fillStyleId = styles
-    })
+    if(figma.currentPage.selection.length > 0){
+      figma.currentPage.selection.forEach(node => {
+        (node as VectorNode).fillStyleId = styles
+      })
+    } else {
+      // show notification
+      console.log("No layer selected")
+      figma.ui.postMessage({ type: 'noLayerSelected', isEmpty: true })
+    }
   }
 }
 

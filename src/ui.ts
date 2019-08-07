@@ -3,6 +3,7 @@ import './list'
 // import * as FriendCard from module("./FriendCardJs");
 
 const themeRoot = document.getElementById("styles")
+let timer:any
 
 onmessage = (event) => {
 
@@ -23,7 +24,6 @@ onmessage = (event) => {
             let newItem = '<li data-id="' + styleId +'" class="style-item"><a href="#"><div class="color" style="background-color: #'+ color +'"></div><div class="name">'+ name +' </div><div class="parent">'+ parent +'</div></a></li>'
             themeRoot.innerHTML += newItem;
             if((index+1) === counter){
-                // console.log("Last one")
                 setTimeout(function(){
                     startListening()
                 }, 100)
@@ -31,6 +31,13 @@ onmessage = (event) => {
         })
 
         
+    } else if (pluginMessage.type == 'noLayerSelected'){
+        clearTimeout(timer)
+        let notification = document.getElementById('notification')
+        notification.className = "show"
+        timer = setTimeout(function(){
+            notification.className = ""
+        }, 3000)
     }
     
 }
