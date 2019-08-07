@@ -1,6 +1,6 @@
 <div align="center">
 
-<img align="center" height="50" src="https://user-images.githubusercontent.com/35271042/62649725-361a1000-b90a-11e9-9bed-46a786636c90.png" />
+<img align="center" height="50" src="https://user-images.githubusercontent.com/35271042/62659451-3f15dc00-b920-11e9-84fe-3901fe978237.png" />
 
 <hr>
 
@@ -13,7 +13,7 @@ A Figma plugin to help find and apply color styles from your current document.
 </div>
 
 ## How to use
-Navigator will look through all of the layers in your document and find the ones with color styles. Simply select the layer that you want to apply a color styles to, run Navigator, find your color and select it.
+Navigator will look through all of the layers in your document and find the ones with color styles. Simply select the layer that you want to apply a color styles to, run Navigator, find your color and select it. You can apply a color style to any vector, line, frame or group.
 
 Note: If you have a large amount of layers in your document, it might take a few seconds longer to load.
 
