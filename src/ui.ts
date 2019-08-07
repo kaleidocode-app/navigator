@@ -13,17 +13,17 @@ onmessage = (event) => {
         document.getElementById("loader").remove()
         
         let counter = pluginMessage.themes[0].length
-        console.log("Found " + counter + " styles")
+        // console.log("Found " + counter + " styles")
         
         pluginMessage.themes[0].forEach((themes:any, index:number) => {
             let name = themes.name
             let color = themes.color
             let parent = themes.parent
-            let styleId = themes.styleId
+            let styleId = themes.styles
             let newItem = '<li data-id="' + styleId +'" class="style-item"><a href="#"><div class="color" style="background-color: #'+ color +'"></div><div class="name">'+ name +' </div><div class="parent">'+ parent +'</div></a></li>'
             themeRoot.innerHTML += newItem;
             if((index+1) === counter){
-                console.log("Last one")
+                // console.log("Last one")
                 setTimeout(function(){
                     startListening()
                 }, 100)

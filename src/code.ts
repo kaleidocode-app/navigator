@@ -1,25 +1,43 @@
+
 figma.showUI(__html__, { width: 400, height: 250});
 
 let ref = []
-const nodes = figma.currentPage.findAll()
+let counter = []
 
-nodes.forEach(nodes => {
-  let children = (nodes as VectorNode)
-  if (children.fillStyleId){
-    let styleId = (nodes as VectorNode).fillStyleId
-    let styleName = figma.getStyleById(String(styleId)).name
-    let styleParent = ""
-    if (styleName.includes("/")){
-      styleParent = styleName.substr(0, styleName.indexOf(' /')); 
-      styleName = styleName.substring(styleName.indexOf("/") + 2)
+setTimeout(function(){
+  const nodes = figma.currentPage.findAll()
+  nodes.forEach(nodes => {
+    let children = (nodes as VectorNode)
+    let styles = children.fillStyleId
+    let stylesString = String(styles)
+    if (styles && stylesString.startsWith('S:')) {
+      let styleId = (nodes as VectorNode).fillStyleId
+      let styleName = figma.getStyleById(String(styleId)).name
+      let styleParent = ""
+      if (styleName.includes("/")) {
+        styleParent = styleName.substr(0, styleName.indexOf(' /'));
+        styleName = styleName.substring(styleName.indexOf("/") + 2)
+      }
+      let colors = children.fills[0].color
+      let styleColor = findTheHEX(colors.r, colors.g, colors.b)
+
+      for (let [key, value] of Object.entries(ref)) {
+        if (value.styles == styleId) {
+          // ignore duplicates
+          return
+        }
+      }
+      ref.push({ name: styleName, color: styleColor, parent: styleParent, styles: styleId })
     }
-    let colors = children.fills[0].color
-    let styleColor = findTheHEX(colors.r, colors.g, colors.b)
-    ref.push({ name: styleName, color: styleColor, parent: styleParent, styleId: styleId})
-  }
-})
+  })
 
-figma.ui.postMessage({ type: 'loadThemes', themes: [ref] })
+  ref.sort(function (a, b) {
+    return parseFloat(a.name) - parseFloat(b.name);
+  });
+  // ref.sort((one, two) => (one > two ? -1 : 1));
+  figma.ui.postMessage({ type: 'loadThemes', themes: [ref] })
+
+}, 100)
 
 figma.ui.onmessage = async msg => {
 
