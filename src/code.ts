@@ -45,8 +45,10 @@ figma.ui.onmessage = async msg => {
     let styles = msg.styleId
     if(figma.currentPage.selection.length > 0){
       figma.currentPage.selection.forEach(node => {
+        console.log(node)
         switch(node.type){
           case "VECTOR":
+          case "RECTANGLE":
           case "TEXT":
           case "STAR":
           case "ELLIPSE":
@@ -61,6 +63,7 @@ figma.ui.onmessage = async msg => {
             node.findAll().forEach(node => {
               switch (node.type) {
                 case "VECTOR":
+                case "RECTANGLE":
                 case "TEXT":
                 case "STAR":
                 case "ELLIPSE":
