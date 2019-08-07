@@ -45,7 +45,38 @@ figma.ui.onmessage = async msg => {
     let styles = msg.styleId
     if(figma.currentPage.selection.length > 0){
       figma.currentPage.selection.forEach(node => {
-        (node as VectorNode).fillStyleId = styles
+        switch(node.type){
+          case "VECTOR":
+          case "TEXT":
+          case "STAR":
+          case "ELLIPSE":
+          case "POLYGON":
+            (node as VectorNode).fillStyleId = styles
+            break;
+          case "LINE":
+            (node as LineNode).strokeStyleId = styles
+            break;
+          case "GROUP":
+          case "FRAME":
+            node.findAll().forEach(node => {
+              switch (node.type) {
+                case "VECTOR":
+                case "TEXT":
+                case "STAR":
+                case "ELLIPSE":
+                case "POLYGON":
+                  (node as VectorNode).fillStyleId = styles
+                  break;
+                case "LINE":
+                  (node as LineNode).strokeStyleId = styles
+                  break;
+              }
+            })
+            break;
+          default:
+            figma.ui.postMessage({ type: 'noLayerSelected', isEmpty: true })
+            break;
+        }
       })
     } else {
       // show notification
