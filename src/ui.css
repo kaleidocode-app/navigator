@@ -125,6 +125,7 @@ li.active {
 
 #notification {
   opacity: 0;
+  pointer-events: none;
   position: absolute;
   margin: 0 12px;
   bottom: 12px;
