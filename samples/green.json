@@ -1,0 +1,19 @@
+{
+  "name": "Green",
+  "colors": {
+    "green.50": "#E8F5E9",
+    "green.100": "#C8E6C9",
+    "green.200": "#A5D6A7",
+    "green.300": "#81C784",
+    "green.400": "#66BB6A",
+    "green.500": "#4CAF50",
+    "green.600": "#43A047",
+    "green.700": "#388E3C",
+    "green.800": "#2E7D32",
+    "green.900": "#1B5E20",
+    "green.A100": "#B9F6CA",
+    "green.A200": "#69F0AE",
+    "green.A400": "#00E676",
+    "green.A700": "#00C853"
+  }
+}

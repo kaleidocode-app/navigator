@@ -1,0 +1,19 @@
+{
+  "name": "Pink",
+  "colors": {
+    "pink.50": "#FCE4EC",
+    "pink.100": "#F8BBD0",
+    "pink.200": "#F48FB1",
+    "pink.300": "#F06292",
+    "pink.400": "#EC407A",
+    "pink.500": "#E91E63",
+    "pink.600": "#D81B60",
+    "pink.700": "#C2185B",
+    "pink.800": "#AD1457",
+    "pink.900": "#880E4F",
+    "pink.A100": "#FF80AB",
+    "pink.A200": "#FF4081",
+    "pink.A400": "#F50057",
+    "pink.A700": "#C51162"
+  }
+}
