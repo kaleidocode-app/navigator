@@ -61,6 +61,7 @@ figma.ui.onmessage = async msg => {
           case "GROUP":
           case "FRAME":
           case "INSTANCE":
+          case "COMPONENT":
             node.findAll().forEach(node => {
               switch (node.type) {
                 case "VECTOR":
@@ -79,6 +80,7 @@ figma.ui.onmessage = async msg => {
             })
             break;
           default:
+            console.log(node)
             figma.ui.postMessage({ type: 'noLayerSelected', isEmpty: true })
             break;
         }
