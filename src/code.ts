@@ -53,6 +53,7 @@ figma.ui.onmessage = async msg => {
           case "STAR":
           case "ELLIPSE":
           case "POLYGON":
+          case "BOOLEAN_OPERATION":
             (node as VectorNode).fillStyleId = styles
             break;
           case "LINE":
