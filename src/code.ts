@@ -15,8 +15,8 @@ setTimeout(function(){
       let styleName = figma.getStyleById(String(styleId)).name
       let styleParent = ""
       if (styleName.includes("/")) {
-        styleParent = styleName.substr(0, styleName.indexOf(' /'));
-        styleName = styleName.substring(styleName.indexOf("/") + 2)
+        styleParent = styleName.substr(0, styleName.indexOf('/'))
+        styleName = styleName.substring(styleName.indexOf("/") + 1)
       }
       let colors = children.fills[0].color
       let styleColor = findTheHEX(colors.r, colors.g, colors.b)
