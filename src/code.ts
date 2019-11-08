@@ -13,8 +13,10 @@ setTimeout(function(){
     if (styles && stylesString.startsWith('S:')) {
       let styleId = (nodes as VectorNode).fillStyleId
       let styleName = figma.getStyleById(String(styleId)).name
+      let styleDescription = figma.getStyleById(String(styleId)).description
       let styleParent = ""
       if (styleName.includes("/")) {
+
         if ((styleName.split('/').length - 1) > 1) {
           styleParent = styleName.substr(0, styleName.lastIndexOf('/'))
           styleName = styleName.substring(styleName.lastIndexOf("/") + 1)
@@ -26,6 +28,10 @@ setTimeout(function(){
         // Remove whitespace from first character in name
         if (styleName.charAt(0) == ' ') {
           styleName = styleName.substr(1);
+        }
+
+        if (styleDescription.length > 0){
+          styleParent += ' - ' + styleDescription
         }
         
       }
