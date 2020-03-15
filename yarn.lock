@@ -2,6 +2,11 @@
 # yarn lockfile v1
 
 
+"@types/list.js@^1.5.1":
+  version "1.5.3"
+  resolved "https://registry.yarnpkg.com/@types/list.js/-/list.js-1.5.3.tgz#0f8abba5caded616b4db27f7cfda45ca975c8e2d"
+  integrity sha512-gOaAxLYjMzAP6Kj18lp8/9dWkIHSQ9Yxz5M0WlbfsNwyNQxch7mm9ueq6EcyhvWMLv+ZPVLnky39EuUjYTvOBA==
+
 "@types/node@^12.6.8":
   version "12.6.9"
   resolved "https://registry.yarnpkg.com/@types/node/-/node-12.6.9.tgz#ffeee23afdc19ab16e979338e7b536fdebbbaeaf"
@@ -169,9 +174,9 @@ abbrev@1:
   integrity sha512-nne9/IiQ/hzIhY6pdDnbBtz7DjPTKrY00P/zvPSm5pOFkl6xuGrGnXn/VtTNNfNtAfZ9/1RtehkszU9qcTii0Q==
 
 acorn@^6.2.1:
-  version "6.2.1"
-  resolved "https://registry.yarnpkg.com/acorn/-/acorn-6.2.1.tgz#3ed8422d6dec09e6121cc7a843ca86a330a86b51"
-  integrity sha512-JD0xT5FCRDNyjDda3Lrg/IxFscp9q4tiYtxE1/nOzlKCk7hIRuYjhq1kCNkbPjMRMZuFq20HNQn1I9k8Oj0E+Q==
+  version "6.4.1"
+  resolved "https://registry.yarnpkg.com/acorn/-/acorn-6.4.1.tgz#531e58ba3f51b9dacb9a6646ca4debf5b14ca474"
+  integrity sha512-ZVA9k326Nwrj3Cj9jlh3wGFutC2ZornPNARZwsNYqQYgN0EsV2d53w5RN/co65Ohn4sUAUtb1rSUAOD6XN9idA==
 
 ajv-errors@^1.0.0:
   version "1.0.1"
@@ -1826,6 +1831,13 @@ lcid@^2.0.0:
   dependencies:
     invert-kv "^2.0.0"
 
+list.js@^1.5.0:
+  version "1.5.0"
+  resolved "https://registry.yarnpkg.com/list.js/-/list.js-1.5.0.tgz#a4cbfc8281ddefc02fdb2d30c8748bfae25fbcda"
+  integrity sha1-pMv8goHd78Av2y0wyHSL+uJfvNo=
+  dependencies:
+    string-natural-compare "^2.0.2"
+
 loader-runner@^2.4.0:
   version "2.4.0"
   resolved "https://registry.yarnpkg.com/loader-runner/-/loader-runner-2.4.0.tgz#ed47066bfe534d7e84c4c7b9998c2a75607d9357"
@@ -2985,6 +2997,11 @@ stream-shift@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/stream-shift/-/stream-shift-1.0.0.tgz#d5c752825e5367e786f78e18e445ea223a155952"
   integrity sha1-1cdSgl5TZ+eG944Y5EXqIjoVWVI=
+
+string-natural-compare@^2.0.2:
+  version "2.0.3"
+  resolved "https://registry.yarnpkg.com/string-natural-compare/-/string-natural-compare-2.0.3.tgz#9dbe1dd65490a5fe14f7a5c9bc686fc67cb9c6e4"
+  integrity sha512-4Kcl12rNjc+6EKhY8QyDVuQTAlMWwRiNbsxnVwBUKFr7dYPQuXVrtNU4sEkjF9LHY0AY6uVbB3ktbkIH4LC+BQ==
 
 string-width@^1.0.1:
   version "1.0.2"
