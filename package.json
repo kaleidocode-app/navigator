@@ -3,6 +3,7 @@
     "watch": "webpack --mode=development --watch"
   },
   "devDependencies": {
+    "@figma/plugin-typings": "^1.62.0",
     "@types/list.js": "^1.5.1",
     "@types/node": "^12.6.8",
     "css-loader": "^3.1.0",

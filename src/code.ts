@@ -4,56 +4,36 @@ figma.showUI(__html__, { width: 400, height: 250});
 let ref = []
 let counter = []
 
-setTimeout(function(){
-  const nodes = figma.currentPage.findAll()
-  nodes.forEach(nodes => {
-    let children = (nodes as VectorNode)
-    let styles = children.fillStyleId
-    let stylesString = String(styles)
-    if (styles && stylesString.startsWith('S:')) {
-      let styleId = (nodes as VectorNode).fillStyleId
-      let styleName = figma.getStyleById(String(styleId)).name
-      let styleDescription = figma.getStyleById(String(styleId)).description
-      let styleParent = ""
-      if (styleName.includes("/")) {
+// Get all local paint styles
+const paintStyles = figma.getLocalPaintStyles();
 
-        if ((styleName.split('/').length - 1) > 1) {
-          styleParent = styleName.substr(0, styleName.lastIndexOf('/'))
-          styleName = styleName.substring(styleName.lastIndexOf("/") + 1)
-        } else {
-          styleParent = styleName.substr(0, styleName.indexOf('/'))
-          styleName = styleName.substring(styleName.indexOf("/") + 1)
-        }
+function separateString(str) {
+  const parts = str.split("/");
+  const var1 = parts[0];
+  const var2 = parts[1];
+  return [var1, var2];
+}
 
-        // Remove whitespace from first character in name
-        if (styleName.charAt(0) == ' ') {
-          styleName = styleName.substr(1);
-        }
 
-        if (styleDescription.length > 0){
-          styleParent += ' - ' + styleDescription
-        }
-        
-      }
-      let colors = children.fills[0].color
-      let styleColor = findTheHEX(colors.r, colors.g, colors.b)
+// Log the names of all local paint styles
+for (const style of paintStyles) {
+  let styleParent
+  let styleName
+  if (style.name.includes("/")) {
+    [styleParent, styleName] = separateString(style.name);
+  } else {
+    styleName = style.name
+  }
 
-      for (let [key, value] of Object.entries(ref)) {
-        if (value.styles == styleId) {
-          // ignore duplicates
-          return
-        }
-      }
-      ref.push({ name: styleName, color: styleColor, parent: styleParent, styles: styleId })
-    }
+  ref.push({
+    name: styleName,
+    parent: styleParent,
+    color: style.paints,
+    styles: style.id
   })
+}
 
-  // sort colors by style name
-  ref.sort((one, two) => (one.name > two.name ? 1 : -1));
-  
-  figma.ui.postMessage({ type: 'loadThemes', themes: [ref] })
-
-}, 100)
+figma.ui.postMessage({ type: 'loadThemes', themes: [ref] })
 
 figma.ui.onmessage = async msg => {
 
@@ -108,22 +88,4 @@ figma.ui.onmessage = async msg => {
       figma.ui.postMessage({ type: 'noLayerSelected', isEmpty: true })
     }
   }
-}
-
-
-function findTheHEX(red: number, green: number, blue: number) {
-  var redHEX = rgbToHex(red)
-  var greenHEX = rgbToHex(green)
-  var blueHEX = rgbToHex(blue)
-
-  return redHEX + greenHEX + blueHEX
-}
-
-function rgbToHex(rgb:any) {
-  rgb = Math.floor(rgb * 255)
-  var hex = Number(rgb).toString(16)
-  if (hex.length < 2) {
-    hex = '0' + hex
-  }
-  return hex
 }

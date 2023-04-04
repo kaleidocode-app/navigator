@@ -12,25 +12,26 @@ onmessage = (event) => {
     if (pluginMessage.type == 'loadThemes') {
 
         document.getElementById("loader").remove()
-        
+
         let counter = pluginMessage.themes[0].length
-        // console.log("Found " + counter + " styles")
-        
+
         pluginMessage.themes[0].forEach((themes:any, index:number) => {
-            let name = themes.name
-            let color = themes.color
-            let parent = themes.parent
-            let styleId = themes.styles
-            let newItem = '<li data-id="' + styleId +'" class="style-item"><a href="#"><div class="color" style="background-color: #'+ color +'"></div><div class="name">'+ name +' </div><div class="parent">'+ parent +'</div></a></li>'
-            themeRoot.innerHTML += newItem;
-            if((index+1) === counter){
-                setTimeout(function(){
-                    startListening()
-                }, 100)
+            if(themes.color[0].type === "SOLID"){
+                let name = themes.name
+                let color = findTheHEX(themes.color[0].color.r, themes.color[0].color.g, themes.color[0].color.b)
+                let parent = themes.parent
+                let styleId = themes.styles
+                let newItem = '<li data-id="' + styleId +'" class="style-item"><a href="#"><div class="color" style="background-color: #'+ color +'"></div><div class="name">'+ name +' </div><div class="parent">'+ parent +'</div></a></li>'
+                themeRoot.innerHTML += newItem;
+                if((index+1) === counter){
+                    setTimeout(function(){
+                        startListening()
+                    }, 100)
+                }
             }
         })
 
-        
+
     } else if (pluginMessage.type == 'noLayerSelected'){
         clearTimeout(timer)
         let notification = document.getElementById('notification')
@@ -39,7 +40,7 @@ onmessage = (event) => {
             notification.className = ""
         }, 3000)
     }
-    
+
 }
 
 document.getElementById("search").focus()
@@ -68,8 +69,25 @@ function startListening(){
         let target = <HTMLElement>e.target
         let styleId = String(target.getAttribute('data-id'))
 
-        parent.postMessage({ pluginMessage: { type: 'apply-styles', styleId }}, '*')   
+        parent.postMessage({ pluginMessage: { type: 'apply-styles', styleId }}, '*')
 
     })
-    
+
+}
+
+function findTheHEX(red:any, green:any, blue:any) {
+  var redHEX = rgbToHex(red)
+  var greenHEX = rgbToHex(green)
+  var blueHEX = rgbToHex(blue)
+
+  return redHEX + greenHEX + blueHEX
+}
+
+function rgbToHex(rgb:any) {
+  rgb = Math.floor(rgb * 255)
+  var hex = Number(rgb).toString(16)
+  if (hex.length < 2) {
+    hex = '0' + hex
+  }
+  return hex
 }
